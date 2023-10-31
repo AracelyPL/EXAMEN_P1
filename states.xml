@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<states>
+    <state>
+        <id>1</id>
+        <name>Aguascalientes</name>
+    </state>
+    <state>
+        <id>2</id>
+        <name>Baja California Norte</name>
+    </state>
+    <state>
+        <id>3</id>
+        <name>Baja California Sur</name>
+    </state>
+    <state>
+        <id>4</id>
+        <name>Campeche</name>
+    </state>
+    <state>
+        <id>5</id>
+        <name>Chiapas</name>
+    </state>
+    <state>
+        <id>20</id>
+        <name>Oaxaca</name>
+    </state>
+    <state>
+        <id>27</id>
+        <name>Tabasco</name>
+    </state>
+    <state>
+        <id>30</id>
+        <name>Veracruz</name>
+    </state>
+    <state>
+        <id>31</id>
+        <name>Yucatán</name>
+    </state>
+    <state>
+        <id>32</id>
+        <name>Zacatecas</name>
+    </state>
+</states>
