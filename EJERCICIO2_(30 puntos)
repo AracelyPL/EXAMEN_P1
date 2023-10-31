@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AGREGAR CIUDADES EN ESTADOS</title>
+    <style>
+        select {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <label for="states">Estados:</label>
+    <select id="states" onchange="getCities()">
+        <option value="">Selecciona un estado</option>
+    </select>
+
+    <label for="cities">Ciudades:</label>
+    <select id="cities">
+        <option value="">Selecciona una ciudad</option>
+    </select>
+
+    <input type="text" id="newCity" placeholder="Nueva ciudad">
+    <button onclick="addCity()">Agregar Ciudad</button>
+
+    <script>
+        function getCities() {
+            var selectedState = document.getElementById("states").value;
+
+            if (selectedState) {
+                var url = "https://my-json-server.typicode.com/rmelchorv/tw-ii/cities?state=" + selectedState;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        var citiesDropdown = document.getElementById("cities");
+                        citiesDropdown.innerHTML = "<option value=''>Selecciona una ciudad</option>";
+
+                        data.forEach(city => {
+                            var option = document.createElement("option");
+                            option.value = city.id;
+                            option.text = city.name;
+                            citiesDropdown.appendChild(option);
+                        });
+                    });
+            }
+        }
+
+        function addCity() {
+            var selectedState = document.getElementById("states").value;
+            var newCityName = document.getElementById("newCity").value;
+
+            if (selectedState === "20") { 
+                var abbreviation = "OAX"; 
+                var cityData = {
+                    name: newCityName,
+                    abbr: abbreviation,
+                    state: selectedState
+                };
+
+                fetch("https://my-json-server.typicode.com/rmelchorv/tw-ii/cities", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json;charset=UTF-8"
+                    },
+                    body: JSON.stringify(cityData)
+                })
+                .then(response => {
+                    if (response.status === 201) {
+                        alert("Ciudad agregada exitosamente");
+                        getCities(); 
+                    } else {
+                        alert("Error al agregar la ciudad");
+                    }
+                });
+            } else {
+                alert("Solo se pueden agregar ciudades a Oaxaca");
+            }
+        }
+
+        fetch("https://my-json-server.typicode.com/rmelchorv/tw-ii/states")
+            .then(response => response.json())
+            .then(data => {
+                var statesDropdown = document.getElementById("states");
+
+                data.forEach(state => {
+                    var option = document.createElement("option");
+                    option.value = state.id;
+                    option.text = state.name;
+                    statesDropdown.appendChild(option);
+                });
+            });
+    </script>
+</body>
+</html>
